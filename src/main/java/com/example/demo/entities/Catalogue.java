@@ -23,8 +23,11 @@ public class Catalogue {
     @OneToMany
     private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
 
+    //???
     private Long quantity;
     private Long price;
+    //??
+
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;

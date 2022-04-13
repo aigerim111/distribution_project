@@ -13,7 +13,7 @@ import java.util.Set;
 public class DictProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_id;
+    private Long productId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dictProductTypeId")
@@ -29,24 +29,24 @@ public class DictProduct {
     private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
 
     @Column(nullable = false)
-    private String name_ru;
-    private String name_kz;
-    private String name_eng;
+    private String nameRu;
+    private String nameKz;
+    private String nameEng;
     @Lob
     @Column(columnDefinition = "BYTEA", nullable = false)
     private byte[] imageByte;
     @Column(nullable = false)
-    private String descr_ru;
-    private String descr_kz;
-    private String descr_eng;
+    private String descrRu;
+    private String descrKz;
+    private String descrEng;
     @Column(nullable = false)
-    private String originCountry_ru;
-    private String originCountry_kz;
-    private String originCountry_eng;
+    private String originCountryRu;
+    private String originCountryKz;
+    private String originCountryEng;
     @Column(nullable = false)
-    private String producer_ru;
-    private String producer_kz;
-    private String producer_eng;
+    private String producerRu;
+    private String producerKz;
+    private String producerEng;
     private String weightNetto;
     private String weightBrutto;
     private String measureUnit;

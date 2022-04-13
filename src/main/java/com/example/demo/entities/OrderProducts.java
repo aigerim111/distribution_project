@@ -10,7 +10,7 @@ import java.util.List;
 public class OrderProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long order_products_id;
+    private Long orderProductsId;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")

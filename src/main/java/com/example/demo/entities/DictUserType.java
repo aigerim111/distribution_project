@@ -13,8 +13,8 @@ public class DictUserType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String name_ru;
-    private String name_kz;
+    private String nameRu;
+    private String nameKz;
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;

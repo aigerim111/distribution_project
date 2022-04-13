@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface OrganizationRepo extends JpaRepository<Organization, Long> {
 
-    Optional<Organization> findOrganizationByOrgId(Long id);
-    Optional<Organization> findByName_kzOrName_ru(String name);
+    Optional<Organization> findByOrgId(Long id);
+    Optional<Organization> findByNameKzOrNameRu(String nameKz, String nameRu);
     List<Organization> findAllByParentOrgOrDictOrgType(Organization parentOrgId, DictOrgType dictOrgType);
     List<Organization> findAllByParentOrgAndDictOrgType(Organization parentOrgId, DictOrgType dictOrgType);
     Optional<Organization> findByBIN(String bin);

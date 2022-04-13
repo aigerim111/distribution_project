@@ -23,8 +23,8 @@ public class User {
     private Organization org;
 
     @Column(nullable = false)
-    private String name_ru;
-    private String name_kz;
+    private String nameRu;
+    private String nameKz;
     @Column(nullable = false)
     private String phone;
     private String email;

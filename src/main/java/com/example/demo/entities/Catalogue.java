@@ -14,7 +14,7 @@ public class Catalogue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long catalogue_id;
+    private Long catalogueId;
 
     @OneToOne
     @JoinColumn(name = "org_id")

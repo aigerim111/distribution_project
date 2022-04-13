@@ -14,7 +14,7 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long order_id;
+    private Long orderId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shop_org_id")

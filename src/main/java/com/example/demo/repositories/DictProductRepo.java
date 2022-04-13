@@ -14,9 +14,9 @@ public interface DictProductRepo extends JpaRepository<DictProduct, Long> {
 
     Optional<DictProduct> findAllByProduct_id(Long id);
     List<DictProduct> findAllByDictProductType(DictProductType dictProductType, Pageable pageable);
-    List<DictProduct> findAllByName_engLikeOrName_ruLikeOrnOrName_kzLike(String name);
-    List<DictProduct> findAllByDescr_engLikeOrdesOrDescr_ruLikeOrnOrName_kz(String descr);
-    List<DictProduct> findAllByProducer_engOrpOrProducer_ruOrpOrProducer_kz(String producer, Pageable pageable);
-    List<DictProduct> findAllByOriginCountry_engOroOrOriginCountry_ruOroOrOriginCountry_kz(String name, Pageable pageable);
+    List<DictProduct> findAllByName_engLikeOrName_ruLikeOrName_kzLike(String name);
+    List<DictProduct> findAllByDescr_engLikeOrDescr_ruLikeOrDescr_kzLike(String descr);
+    List<DictProduct> findAllByProducer_engOrProducer_ruOrProducer_kz(String producer, Pageable pageable);
+    List<DictProduct> findAllByOriginCountry_engOrOriginCountry_ruOrOriginCountry_kz(String name, Pageable pageable);
 
 }

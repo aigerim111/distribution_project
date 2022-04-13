@@ -12,11 +12,11 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orgId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dictOrgTypeId")
     private DictOrgType dictOrgType;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parentOrgId")
     private Organization parentOrg;
 

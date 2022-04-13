@@ -12,7 +12,7 @@ public class Login {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loginId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

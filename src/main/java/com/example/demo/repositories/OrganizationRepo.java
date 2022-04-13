@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface OrganizationRepo extends JpaRepository<Organization, Long> {
 
     Optional<Organization> findOrganizationByOrgId(Long id);
-    List<Organization> findAllByName_kzOrName_ru(String name);
+    Optional<Organization> findByName_kzOrName_ru(String name);
     List<Organization> findAllByParentOrgOrDictOrgType(Organization parentOrgId, DictOrgType dictOrgType);
     List<Organization> findAllByParentOrgAndDictOrgType(Organization parentOrgId, DictOrgType dictOrgType);
-    Optional<Organization> findAllByBIN(String bin);
-    Optional<Organization> findAllByAddressOrPhone(String address, String phone);
+    Optional<Organization> findByBIN(String bin);
+    Optional<Organization> findByAddressOrPhone(String address, String phone);
 
 }

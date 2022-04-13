@@ -20,7 +20,7 @@ public class Catalogue {
     @JoinColumn(name = "org_id")
     private Organization org;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
 
     //???

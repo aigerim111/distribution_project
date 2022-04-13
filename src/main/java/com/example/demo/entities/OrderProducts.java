@@ -12,19 +12,19 @@ public class OrderProducts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_products_id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supp_org_id")
     private Organization suppOrgId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supp_user_id")
     private User suppUserId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private DictProduct product;
 

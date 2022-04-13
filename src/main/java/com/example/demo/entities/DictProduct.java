@@ -15,17 +15,17 @@ public class DictProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long product_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dictProductTypeId")
     private DictProductType dictProductType;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<WarehouseProducts> warehouseProducts = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<OrderProducts> orderProducts = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
 
     @Column(nullable = false)
@@ -33,7 +33,7 @@ public class DictProduct {
     private String name_kz;
     private String name_eng;
     @Lob
-    @Column(columnDefinition = "LONGBLOB", nullable = false)
+    @Column(columnDefinition = "BYTEA", nullable = false)
     private byte[] imageByte;
     @Column(nullable = false)
     private String descr_ru;

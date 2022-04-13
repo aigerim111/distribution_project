@@ -17,9 +17,9 @@ import java.util.Set;
 @Repository
 public interface OrderRepo extends JpaRepository<Order, Long> {
 
-    Optional<Order> findAllByOrder_id(Long id);
-    Optional<Order> findAllByShopUserId(User id);
-    Optional<Order> findAllByShopOrgId(Organization id);
+    Optional<Order> findByOrder_id(Long id);
+    Optional<Order> findByShopUserId(User id);
+    Optional<Order> findByShopOrgId(Organization id);
     List<Order> findAllByStatus(Long status, Pageable pageable);
 
     //доделать запросы

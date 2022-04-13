@@ -10,20 +10,21 @@ import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shop_org_id")
     private Organization shopOrgId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shop_user_id")
     private User shopUserId;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<OrderProducts> orderProducts = new HashSet<>();
 
 

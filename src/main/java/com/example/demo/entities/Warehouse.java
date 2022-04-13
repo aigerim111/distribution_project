@@ -15,11 +15,11 @@ public class Warehouse {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long warehouse_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "org_id")
     private Organization org;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<WarehouseProducts> warehouseProducts = new HashSet<>();
 
     //@Column(nullable = false)

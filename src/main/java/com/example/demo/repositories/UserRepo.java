@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long>  {
 
-    Optional<User> findAllByUserId(Long id);
+    Optional<User> findByUserId(Long id);
     List<User> findAllByName_ruOrName_z(String name);
     List<User> findAllByOrgOrDictUserType(Organization org, DictUserType dictUserType, Pageable pageable);
     List<User> findAllByOrgAndDictUserType(Organization org, DictUserType dictUserType, Pageable pageable);
-    Optional<User> findAllByEmailOrPhone(String email, String phone);
+    Optional<User> findByEmailOrPhone(String email, String phone);
 }

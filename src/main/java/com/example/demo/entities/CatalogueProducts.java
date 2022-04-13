@@ -16,7 +16,7 @@ public class CatalogueProducts {
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private DictProduct product;
 

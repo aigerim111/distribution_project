@@ -21,8 +21,8 @@ public class Organization {
     private Organization parentOrg;
 
     @Column(nullable = false)
-    private String name_ru;
-    private String name_kz;
+    private String nameRu;
+    private String nameKz;
     @Column(unique = true, nullable = false)
     private String BIN;
     //@Column(nullable = false)

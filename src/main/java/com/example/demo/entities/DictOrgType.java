@@ -13,8 +13,8 @@ public class DictOrgType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dictOrgTypeId;
     @Column(nullable = false)
-    private String name_ru;
-    private String name_kz;
+    private String nameRu;
+    private String nameKz;
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;

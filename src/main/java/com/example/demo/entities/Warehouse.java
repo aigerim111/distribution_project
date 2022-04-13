@@ -13,7 +13,7 @@ import java.util.Set;
 public class Warehouse {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long warehouse_id;
+    private Long warehouseId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "org_id")

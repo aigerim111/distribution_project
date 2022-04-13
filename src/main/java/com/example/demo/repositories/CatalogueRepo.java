@@ -11,9 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CatalogueRepo extends JpaRepository<Catalogue, Long> {
 
-    Optional<Catalogue> findByCatalogue_id(Long id);
-    Optional<Catalogue> findByOrg(Organization org, Pageable pageable);
-
-    //??
-
+    Optional<Catalogue> findByCatalogueId(Long id);
+    Optional<Catalogue> findByOrg(Organization org);
 }

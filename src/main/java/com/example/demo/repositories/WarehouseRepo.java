@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface WarehouseRepo extends JpaRepository<Warehouse, Long> {
 
-    Optional<Warehouse> findByWarehouse_id(Long id);
+    Optional<Warehouse> findByWarehouseId(Long id);
     List<Warehouse> findAllByOrg(Organization org);
     Optional<Warehouse> findByAddressOrPhone(String address, String phone);
 

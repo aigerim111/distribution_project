@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,10 +21,12 @@ public class Catalogue {
     @JoinColumn(name = "org_id")
     private Organization org;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "catalogue",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
 
-    //???
+    //???????
     private Long quantity;
     private Long price;
     //??
@@ -38,4 +41,9 @@ public class Catalogue {
         this.createdDateTime = LocalDateTime.now();
     }
 
+    public Catalogue addProducts(CatalogueProducts catalogueProducts){
+        catalogueProducts.setCatalogue(this);
+        this.getCatalogueProducts().add(catalogueProducts);
+        return this;
+    }
 }

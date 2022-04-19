@@ -24,7 +24,7 @@ public class Order {
     @JoinColumn(name = "shop_user_id")
     private User shopUserId;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private Set<OrderProducts> orderProducts = new HashSet<>();
 
 

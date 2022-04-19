@@ -19,7 +19,7 @@ public class Warehouse {
     @JoinColumn(name = "org_id")
     private Organization org;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "warehouse",fetch = FetchType.LAZY)
     private Set<WarehouseProducts> warehouseProducts = new HashSet<>();
 
     //@Column(nullable = false)

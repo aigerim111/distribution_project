@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ public class CatalogueProducts {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
 
@@ -21,4 +22,13 @@ public class CatalogueProducts {
     private DictProduct product;
 
     private Long quantity;
+
+    public CatalogueProducts(DictProduct product, Long quantity){
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public CatalogueProducts() {
+
+    }
 }

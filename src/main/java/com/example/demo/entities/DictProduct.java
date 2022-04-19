@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.lang.annotation.Target;
@@ -19,22 +20,24 @@ public class DictProduct {
     @JoinColumn(name = "dictProductTypeId")
     private DictProductType dictProductType;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<WarehouseProducts> warehouseProducts = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<OrderProducts> orderProducts = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
 
     @Column(nullable = false)
     private String nameRu;
     private String nameKz;
     private String nameEng;
-    @Lob
-    @Column(columnDefinition = "BYTEA", nullable = false)
+
+    @Type(type="org.hibernate.type.BinaryType")
+    @Column(columnDefinition = "BYTEA", nullable = true)
     private byte[] imageByte;
+
     @Column(nullable = false)
     private String descrRu;
     private String descrKz;
@@ -47,9 +50,12 @@ public class DictProduct {
     private String producerRu;
     private String producerKz;
     private String producerEng;
+
     private String weightNetto;
     private String weightBrutto;
+
     private String measureUnit;
+
     private String protein;
     private String fats;
     private String carbs;

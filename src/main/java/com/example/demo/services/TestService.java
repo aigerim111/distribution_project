@@ -59,7 +59,7 @@ public class TestService {
     public Catalogue addProductToCatalogue(Long productId, Long catalogueId, Long quantity){
         DictProduct product = productRepo.findByProductId(productId).orElseThrow();
         Catalogue catalogue = catalogueRepo.findByCatalogueId(catalogueId).orElseThrow();
-        CatalogueProducts catalogueProducts = new CatalogueProducts(product,quantity);
+        CatalogueProducts catalogueProducts = new CatalogueProducts(catalogue,product,quantity);
 
         catalogue.getCatalogueProducts().add(catalogueProducts);
         return catalogueRepo.save(catalogue); //kak ispravit'

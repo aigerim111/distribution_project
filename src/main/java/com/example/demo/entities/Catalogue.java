@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import net.minidev.json.annotate.JsonIgnore;
 
@@ -22,10 +23,17 @@ public class Catalogue {
     @JoinColumn(name = "org_id")
     private Organization org;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "catalogue",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<CatalogueProducts> catalogueProducts = new ArrayList<>();
+
+
+    //???????
+    private Long quantity;
+    private Long price;
+    //??
 
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
@@ -36,4 +44,5 @@ public class Catalogue {
     protected void onCreate(){
         this.createdDateTime = LocalDateTime.now();
     }
+
 }

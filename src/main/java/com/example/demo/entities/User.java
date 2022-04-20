@@ -26,12 +26,10 @@ public class User {
     @JsonIgnore //not sure
     private Login login;
 
-    @Column(nullable = false)
     private String nameRu;
     private String nameKz;
-    @Column(nullable = false)
     private String phone;
-    private String email;
+
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;
@@ -42,91 +40,4 @@ public class User {
         this.createdDateTime = LocalDateTime.now();
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public DictUserType getDictUserType() {
-        return dictUserType;
-    }
-
-    public void setDictUserType(DictUserType dictUserType) {
-        this.dictUserType = dictUserType;
-    }
-
-    public Organization getOrg() {
-        return org;
-    }
-
-    public void setOrg(Organization org) {
-        this.org = org;
-    }
-
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
-    public String getNameRu() {
-        return nameRu;
-    }
-
-    public void setNameRu(String nameRu) {
-        this.nameRu = nameRu;
-    }
-
-    public String getNameKz() {
-        return nameKz;
-    }
-
-    public void setNameKz(String nameKz) {
-        this.nameKz = nameKz;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getModifiedDateTime() {
-        return modifiedDateTime;
-    }
-
-    public void setModifiedDateTime(LocalDateTime modifiedDateTime) {
-        this.modifiedDateTime = modifiedDateTime;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
 }

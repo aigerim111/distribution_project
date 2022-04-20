@@ -2,12 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserDTO;
 import com.example.demo.entities.*;
+import com.example.demo.services.LoginService;
 import com.example.demo.services.TestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,15 +17,18 @@ import java.util.List;
 public class TestController {
 
     private final TestService testService;
+    private final LoginService loginService;
 
-    public TestController(TestService testService) {
+    public TestController(TestService testService, LoginService loginService) {
         this.testService = testService;
+        this.loginService = loginService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Login> loginUser(@RequestBody UserDTO userDTO){
-        return new ResponseEntity<>(testService.loginUser(userDTO), HttpStatus.OK);
+    @PostMapping("/login/{orgId}/{dictUserTypeId}")
+    public ResponseEntity<Login> loginUser(@RequestBody Login login, @PathVariable("orgId") String orgId, @PathVariable("dictUserTypeId") String dictUserTypeId){
+        return new ResponseEntity<>(loginService.createLogin(login, Long.parseLong(orgId), Long.parseLong(dictUserTypeId)), HttpStatus.OK);
     }
+
 
     @PostMapping("/user/{loginId}/{orgId}")
     public ResponseEntity<User> createUser(@RequestBody User user,

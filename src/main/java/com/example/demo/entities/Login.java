@@ -12,7 +12,7 @@ public class Login {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loginId;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -20,6 +20,8 @@ public class Login {
     private String username;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String email;
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedTime;
@@ -29,62 +31,5 @@ public class Login {
     protected void onCreate(){
         this.createdDateTime = LocalDateTime.now();
     }
-
-    public Long getLoginId() {
-        return loginId;
-    }
-
-    public void setLoginId(Long loginId) {
-        this.loginId = loginId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
-    }
-
-    public LocalDateTime getModifiedTime() {
-        return modifiedTime;
-    }
-
-    public void setModifiedTime(LocalDateTime modifiedTime) {
-        this.modifiedTime = modifiedTime;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
 
 }

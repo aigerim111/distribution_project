@@ -1,12 +1,15 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.lang.annotation.Target;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -21,13 +24,16 @@ public class DictProduct {
     private DictProductType dictProductType;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Set<WarehouseProducts> warehouseProducts = new HashSet<>();
+    @JsonIgnore
+    private List<WarehouseProducts> warehouseProducts = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Set<OrderProducts> orderProducts = new HashSet<>();
+    @JsonIgnore
+    private List<OrderProducts> orderProducts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<CatalogueProducts> catalogueProducts = new ArrayList<>();
 
     @Column(nullable = false)
     private String nameRu;

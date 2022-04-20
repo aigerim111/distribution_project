@@ -26,11 +26,11 @@ public class User {
     @JsonIgnore //not sure
     private Login login;
 
-    @Column(nullable = false)
     private String nameRu;
     private String nameKz;
-    @Column(nullable = false)
     private String phone;
+
+    @Column(nullable = false)
     private String email;
     @Column(updatable = false)
     private LocalDateTime createdDateTime;

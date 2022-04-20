@@ -18,7 +18,7 @@ public class Login {
 
     @Column(nullable = false)
     private String username;
-    @Column(nullable = false)
+
     private String password;
     @Column(updatable = false)
     private LocalDateTime createdDateTime;

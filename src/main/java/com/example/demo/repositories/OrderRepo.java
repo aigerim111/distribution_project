@@ -24,7 +24,7 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
     List<Order> findAllByDateOfDeliveryOrDateOfOrderRegistration(LocalDateTime dateOfDelivery, LocalDateTime dateOfOrderRegistration);
     List<Order> findAllByTotalPrice(Long totalPrice);
 
-    List<Order> findByOrderProducts(OrderProducts orderProducts);
+    Optional<Order> findByOrderProducts(OrderProducts orderProducts);
 
     //??
     //Set<OrderProducts> findAllBy

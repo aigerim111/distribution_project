@@ -5,6 +5,7 @@ import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,12 +25,7 @@ public class Catalogue {
     @OneToMany(mappedBy = "catalogue",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
-
-    //???????
-    private Long quantity;
-    private Long price;
-    //??
+    private List<CatalogueProducts> catalogueProducts = new ArrayList<>();
 
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
@@ -39,11 +35,5 @@ public class Catalogue {
     @PrePersist
     protected void onCreate(){
         this.createdDateTime = LocalDateTime.now();
-    }
-
-    public Catalogue addProducts(CatalogueProducts catalogueProducts){
-        catalogueProducts.setCatalogue(this);
-        this.getCatalogueProducts().add(catalogueProducts);
-        return this;
     }
 }

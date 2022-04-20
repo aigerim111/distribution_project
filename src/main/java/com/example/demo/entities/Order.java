@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Order {
     private User shopUserId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private Set<OrderProducts> orderProducts = new HashSet<>();
+    private List<OrderProducts> orderProducts = new ArrayList<>();
 
 
     private Long totalPrice;

@@ -59,10 +59,10 @@ public class TestService {
     public Catalogue addProductToCatalogue(Long productId, Long catalogueId, Long quantity){
         DictProduct product = productRepo.findByProductId(productId).orElseThrow();
         Catalogue catalogue = catalogueRepo.findByCatalogueId(catalogueId).orElseThrow();
-
         CatalogueProducts catalogueProducts = new CatalogueProducts(product,quantity);
-        catalogue.addProducts(catalogueProducts);
-        return catalogueRepo.save(catalogue); //kak isparvit
+
+        catalogue.getCatalogueProducts().add(catalogueProducts);
+        return catalogueRepo.save(catalogue); //kak ispravit'
     }
 
     public List<Organization> createOrganization(List<Organization> organization) {

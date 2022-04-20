@@ -1,10 +1,12 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +26,8 @@ public class Catalogue {
     @OneToMany(mappedBy = "catalogue",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Set<CatalogueProducts> catalogueProducts = new HashSet<>();
+    @JsonManagedReference
+    private List<CatalogueProducts> catalogueProducts = new ArrayList<>();
 
     //???????
     private Long quantity;
@@ -41,9 +44,4 @@ public class Catalogue {
         this.createdDateTime = LocalDateTime.now();
     }
 
-    public Catalogue addProducts(CatalogueProducts catalogueProducts){
-        catalogueProducts.setCatalogue(this);
-        this.getCatalogueProducts().add(catalogueProducts);
-        return this;
-    }
 }

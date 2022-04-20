@@ -1,6 +1,7 @@
 package com.example.demo.repositories;
 
 import com.example.demo.entities.DictUserType;
+import com.example.demo.entities.Login;
 import com.example.demo.entities.Organization;
 import com.example.demo.entities.User;
 import org.springframework.data.domain.Pageable;
@@ -19,5 +20,5 @@ public interface UserRepo extends JpaRepository<User, Long>  {
     List<User> findAllByOrgOrDictUserType(Organization org, DictUserType dictUserType, Pageable pageable);
     List<User> findAllByOrgAndDictUserType(Organization org, DictUserType dictUserType, Pageable pageable);
     Optional<User> findByEmailOrPhone(String email, String phone);
-    Optional<User> findByLogin(Long loginId);
+    Optional<User> findByLogin(Login loginId);
 }

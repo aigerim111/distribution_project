@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class Warehouse {
     private Organization org;
 
     @OneToMany(mappedBy = "warehouse",fetch = FetchType.LAZY)
-    private Set<WarehouseProducts> warehouseProducts = new HashSet<>();
+    private List<WarehouseProducts> warehouseProducts = new ArrayList<>();
 
     //@Column(nullable = false)
     private String address;

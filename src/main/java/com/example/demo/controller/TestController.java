@@ -4,6 +4,7 @@ import com.example.demo.dto.UserDTO;
 import com.example.demo.entities.*;
 import com.example.demo.services.LoginService;
 import com.example.demo.services.TestService;
+import com.example.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,70 +19,81 @@ public class TestController {
 
     private final TestService testService;
     private final LoginService loginService;
+    private final UserService userService;
 
-    public TestController(TestService testService, LoginService loginService) {
+    public TestController(TestService testService, LoginService loginService, UserService userService) {
         this.testService = testService;
         this.loginService = loginService;
+        this.userService = userService;
     }
 
-    @PostMapping("/login/{orgId}/{dictUserTypeId}")
-    public ResponseEntity<Login> loginUser(@RequestBody Login login, @PathVariable("orgId") String orgId, @PathVariable("dictUserTypeId") String dictUserTypeId){
-        return new ResponseEntity<>(loginService.createLogin(login, Long.parseLong(orgId), Long.parseLong(dictUserTypeId)), HttpStatus.OK);
+    @PostMapping("/warehouse/{orgid}")
+    public ResponseEntity<Warehouse> createWarehouse(@RequestBody Warehouse warehouse,
+                                                     @PathVariable("orgid") String orgId){
+        return new ResponseEntity<>(testService.createWarehouse(warehouse, Long.parseLong(orgId)), HttpStatus.OK);
     }
 
-
-    @PostMapping("/user/{loginId}/{orgId}")
-    public ResponseEntity<User> createUser(@RequestBody User user,
-                                           @PathVariable("loginId") String loginId,
-                                           @PathVariable("orgId") String orgId){
+    @PostMapping("/order/{orgid}/{userid}")
+    public ResponseEntity<Order> createOrder(@PathVariable("orgid") String orgId,
+                                             @PathVariable("userid") String userId){
         return new ResponseEntity<>(
-                testService.createUser(user, Long.parseLong(loginId), Long.parseLong(orgId)), HttpStatus.OK);
+                testService.createOrder(Long.parseLong(orgId),
+                        Long.parseLong(userId)), HttpStatus.OK);
     }
 
-    @GetMapping("/userlist")
-    public ResponseEntity<List<User>> allUsers(){
-        return new ResponseEntity<>(testService.allUsers(), HttpStatus.OK);
+    @PostMapping("/product/{dictProductTypeId}")
+    public ResponseEntity<DictProduct> createProduct(
+            @RequestBody DictProduct product,
+            @PathVariable("dictProductTypeId") String productTypeId) throws IOException {
+        return new ResponseEntity<>(
+                testService.createProduct(product,
+                        Long.parseLong(productTypeId)), HttpStatus.OK);
     }
 
-    @PostMapping("/catalogue")
-    public ResponseEntity<Catalogue> createCatalogue(@RequestBody Catalogue catalogue){
-        return new ResponseEntity<>(testService.createCatalogue(catalogue), HttpStatus.OK);
-    }
 
-    @PostMapping("/org")
-    public ResponseEntity<List<Organization>> createOrganization(@RequestBody List<Organization> organization){
-        return new ResponseEntity<>(testService.createOrganization(organization), HttpStatus.OK);
-    }
+//    @PostMapping("/login/{orgId}/{dictUserTypeId}")
+//    public ResponseEntity<Login> loginUser(@RequestBody Login login, @PathVariable("orgId") String orgId, @PathVariable("dictUserTypeId") String dictUserTypeId){
+//        return new ResponseEntity<>(loginService.createLogin(login, Long.parseLong(orgId), Long.parseLong(dictUserTypeId)), HttpStatus.OK);
+//    }
+//
+//
+//    @PostMapping("/user/{userid}")
+//    public ResponseEntity<User> addUserData(@RequestBody UserDTO userDTO,
+//                                           @PathVariable("userid") String userId){
+//        return new ResponseEntity<>(
+//                userService.addUserData(userDTO, Long.parseLong(userId)), HttpStatus.OK);
+//    }
 
-    @PostMapping("/warehouse")
-    public ResponseEntity<Warehouse> createWarehouse(@RequestBody Warehouse warehouse){
-        return new ResponseEntity<>(testService.createWarehouse(warehouse), HttpStatus.OK);
-    }
+//    @GetMapping("/userlist")
+//    public ResponseEntity<List<User>> allUsers(){
+//        return new ResponseEntity<>(testService.allUsers(), HttpStatus.OK);
+//    }
 
-    @PostMapping("/order")
-    public ResponseEntity<Order> createOrder(@RequestBody Order order){
-        return new ResponseEntity<>(testService.createOrder(order), HttpStatus.OK);
-    }
+//    @PostMapping("/catalogue/{orgId}")
+//    public ResponseEntity<Catalogue> createCatalogue(@RequestBody Catalogue catalogue,
+//                                                     @PathVariable("orgId") String orgId){
+//        return new ResponseEntity<>(testService.createCatalogue(catalogue, Long.parseLong(orgId)), HttpStatus.OK);
+//    }
 
-    @PostMapping("/product")
-    public ResponseEntity<DictProduct> createProduct(@RequestBody DictProduct product) throws IOException {
-        return new ResponseEntity<>(testService.createProduct(product), HttpStatus.OK);
-    }
+//    @PostMapping("/org")
+//    public ResponseEntity<List<Organization>> createOrganization(@RequestBody List<Organization> organization){
+//        return new ResponseEntity<>(testService.createOrganization(organization), HttpStatus.OK);
+//    }
 
-    @PostMapping("/add/{catalogueId}/{productId}")
-    public ResponseEntity<Catalogue> addProductToCatalogue(@PathVariable("catalogueId") String catalogueId,
-                                                        @PathVariable("productId") String productId,
-                                                        @RequestParam("quantity") String quantity){
-        Catalogue catalogue = testService.addProductToCatalogue(
-                Long.parseLong(productId),
-                Long.parseLong(catalogueId),
-                Long.parseLong(quantity));
-        return new ResponseEntity<>(catalogue, HttpStatus.OK);
-    }
+//    @PostMapping("/add/{catalogueId}/{productId}")
+//    public ResponseEntity<Catalogue> addProductToCatalogue(@PathVariable("catalogueId") String catalogueId,
+//                                                        @PathVariable("productId") String productId,
+//                                                        @RequestParam("quantity") String quantity){
+//        Catalogue catalogue = testService.addProductToCatalogue(
+//                Long.parseLong(productId),
+//                Long.parseLong(catalogueId),
+//                Long.parseLong(quantity));
+//        return new ResponseEntity<>(catalogue, HttpStatus.OK);
+//    }
 
-    @GetMapping("/cataloguelist")
-    public ResponseEntity<List<Catalogue>> allCatalogues(){
-        return new ResponseEntity<>(testService.getCatalogues(), HttpStatus.OK);
-    }
+//    @GetMapping("/cataloguelist")
+//    public ResponseEntity<List<Catalogue>> allCatalogues(){
+//        return new ResponseEntity<>(testService.getCatalogues(), HttpStatus.OK);
+//    }
 
 }

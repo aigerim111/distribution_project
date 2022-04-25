@@ -9,3 +9,6 @@
 
 /libraries
 /jpa-buddy.xml
+
+../.idea
+../src/main/resources

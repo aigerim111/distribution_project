@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.UserDTO;
 import com.example.demo.entities.*;
 import com.example.demo.services.LoginService;
 import com.example.demo.services.TestService;

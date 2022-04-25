@@ -29,12 +29,6 @@ public class Catalogue {
             cascade = CascadeType.ALL)
     private List<CatalogueProducts> catalogueProducts = new ArrayList<>();
 
-
-    //???????
-    private Long quantity;
-    private Long price;
-    //??
-
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;

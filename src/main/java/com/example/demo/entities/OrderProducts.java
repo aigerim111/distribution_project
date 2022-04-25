@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class OrderProducts {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
     @ManyToOne(fetch = FetchType.EAGER)

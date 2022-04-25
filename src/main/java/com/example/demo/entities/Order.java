@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Order {
     @JoinColumn(name = "shop_user_id")
     private User shopUserId;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<OrderProducts> orderProducts = new ArrayList<>();
 
@@ -33,12 +35,16 @@ public class Order {
     @Column(updatable = false)
     private LocalDateTime dateOfOrderRegistration;
     private LocalDateTime dateOfDelivery;
+
+    //0 - created, 1 - accepted, 2 - in process, 3 - ended, 4 - something wrong happened, omg
     private Long status;
 
 
     @PrePersist
     protected void onCreate(){
         this.dateOfOrderRegistration = LocalDateTime.now();
+        this.status = 0L;
+        this.totalPrice = 0L;
     };
 
 }

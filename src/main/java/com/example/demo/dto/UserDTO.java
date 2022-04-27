@@ -2,12 +2,13 @@ package com.example.demo.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
-//LoginDto
 public class UserDTO {
 
-    private String username;
-
-    private String password;
-
+    private String nameKZ;
+    private String nameRu;
+    @NotEmpty
+    private String phone;
 }

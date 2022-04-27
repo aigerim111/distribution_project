@@ -1,25 +1,37 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.Login;
-import com.example.demo.entities.Organization;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entities.User;
-import com.example.demo.repositories.LoginRepo;
-import com.example.demo.repositories.OrganizationRepo;
 import com.example.demo.repositories.UserRepo;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
 
+    //create user
+
+
+
     private final UserRepo userRepo;
-    private final LoginRepo loginRepo;
-    private final OrganizationRepo organizationRepo;
 
 
-    public UserService(UserRepo userRepo, LoginRepo loginRepo, OrganizationRepo organizationRepo) {
+    public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
-        this.loginRepo = loginRepo;
-        this.organizationRepo = organizationRepo;
+    }
+
+    public User addUserData(UserDTO userDTO, Long userId){
+        User user = userRepo.findByUserId(userId).orElseThrow();
+        user.setNameKz(userDTO.getNameKZ());
+        user.setNameRu(userDTO.getNameRu());
+        user.setPhone(userDTO.getPhone());
+
+        return userRepo.save(user);
+    }
+
+    public List<User> allUsers() {
+        return userRepo.findAll();
     }
 
 }

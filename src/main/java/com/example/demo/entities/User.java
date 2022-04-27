@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -14,17 +15,18 @@ public class User {
     private Long userId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "dictUserTypeId")
-    private DictUserType dictUserType;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "org_id")
     @JsonIgnore //not sure
     private Organization org;
 
-    @OneToOne(mappedBy = "user")
-    @JsonIgnore //not sure
-    private Login login;
+    @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String email;
+    @ManyToMany
+    private Collection<Role> roles;
 
     private String nameRu;
     private String nameKz;

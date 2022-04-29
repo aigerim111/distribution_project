@@ -19,13 +19,13 @@ public class User {
     @JsonIgnore //not sure
     private Organization org;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String username;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String email;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Role> roles;
 
     private String nameRu;

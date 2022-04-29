@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.entities.User;
 import com.example.demo.services.UserService;
@@ -16,19 +17,15 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    ///Сделать секюрити для логина и регистрации юзера
-
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping("/login/{orgId}/{dictUserTypeId}")
-    public ResponseEntity<User> createUser(@RequestBody User user,
-                                           @PathVariable("orgId") String orgId,
-                                           @PathVariable("dictUserTypeId") String dictUserTypeId){
-        return new ResponseEntity<>(userService.createUser(user, Long.parseLong(orgId), Long.parseLong(dictUserTypeId)), HttpStatus.OK);
+    @PostMapping("/register/{orgId}")
+    public ResponseEntity<User> loginUser(@RequestBody LoginDTO user, @PathVariable("orgId") String orgId){
+        return new ResponseEntity<>(userService.registerUser(user, Long.parseLong(orgId)), HttpStatus.OK);
     }
 
 

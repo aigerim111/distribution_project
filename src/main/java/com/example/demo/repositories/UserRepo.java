@@ -15,7 +15,5 @@ public interface UserRepo extends JpaRepository<User, Long>  {
     Optional<User> findByUserId(Long id);
     Optional<User> findByUsername(String username);
     List<User> findAllByNameKzOrNameRu(String nameKz, String nameRu);
-    List<User> findAllByOrgOrDictUserType(Organization org, DictUserType dictUserType, Pageable pageable);
-    List<User> findAllByOrgAndDictUserType(Organization org, DictUserType dictUserType, Pageable pageable);
 
 }

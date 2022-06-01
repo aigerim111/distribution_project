@@ -19,9 +19,9 @@ public class CatalogueController {
     }
 
     @PostMapping("/catalogue/{orgId}")
-    public ResponseEntity<Catalogue> createCatalogue(@RequestBody Catalogue catalogue,
+    public ResponseEntity<Catalogue> createCatalogue(
                                                      @PathVariable("orgId") String orgId){
-        return new ResponseEntity<>(catalogueService.createCatalogue(catalogue, Long.parseLong(orgId)), HttpStatus.OK);
+        return new ResponseEntity<>(catalogueService.createCatalogue(Long.parseLong(orgId)), HttpStatus.OK);
     }
 
     @PostMapping("/add/{catalogueId}/{productId}")

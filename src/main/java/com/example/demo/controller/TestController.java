@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class TestController {
 
     private final TestService testService;
@@ -36,14 +36,22 @@ public class TestController {
                         Long.parseLong(userId)), HttpStatus.OK);
     }
 
-    @PostMapping("/product/{dictProductTypeId}")
-    public ResponseEntity<DictProduct> createProduct(
-            @RequestBody DictProduct product,
-            @PathVariable("dictProductTypeId") String productTypeId) throws IOException {
-        return new ResponseEntity<>(
-                testService.createProduct(product,
-                        Long.parseLong(productTypeId)), HttpStatus.OK);
+    @GetMapping("/catalogue/{catalogueid}/products")
+    public ResponseEntity<List<DictProduct>> getProductsByCatalogue(@PathVariable("catalogueid") String catalogueId){
+        return new ResponseEntity<>(testService.findProductsByCatalogue(Long.parseLong(catalogueId)), HttpStatus.OK);
     }
+
+//
+//    @PostMapping("/product/{dictProductTypeId}")
+//    public ResponseEntity<DictProduct> createProduct(
+//            @RequestBody DictProduct product,
+//            @PathVariable("dictProductTypeId") String productTypeId) throws IOException {
+//        return new ResponseEntity<>(
+//                testService.createProduct(product,
+//                        Long.parseLong(productTypeId)), HttpStatus.OK);
+//    }
+
+
 
 
 //    @PostMapping("/login/{orgId}/{dictUserTypeId}")

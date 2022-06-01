@@ -25,14 +25,13 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         } else {
             String header = request.getHeader(SecurityConstants.HEADER_STRING);
             if(header != null && header.startsWith(SecurityConstants.TOKEN_PREFIX)){
-                String token = header.substring(SecurityConstants.HEADER_STRING.length());
+                String token = header.substring(SecurityConstants.TOKEN_PREFIX.length());
                 try{
-                    if(jwtUtils.verifyToken(token)){
-                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken
-                                (jwtUtils.getUsernameFromToken(token), null, jwtUtils.getRolesFromToken(token));
-                        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                        filterChain.doFilter(request,response);
-                    }
+                    jwtUtils.verifyToken(token);
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken
+                            (jwtUtils.getUsernameFromToken(token), null, jwtUtils.getRolesFromToken(token));
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    filterChain.doFilter(request,response);
                 } catch (Exception e) {
                     response.setStatus(FORBIDDEN.value());
                     ResponseWrapper responseWrapper = new ResponseWrapper();

@@ -36,6 +36,8 @@ public class UserController {
                 userService.addUserData(userDTO, Long.parseLong(userId)), HttpStatus.OK);
     }
 
+
+
     @GetMapping("/userlist")
     public ResponseEntity<List<User>> allUsers(){
         return new ResponseEntity<>(userService.allUsers(), HttpStatus.OK);

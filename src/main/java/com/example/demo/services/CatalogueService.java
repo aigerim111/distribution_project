@@ -24,7 +24,8 @@ public class CatalogueService {
         this.productRepo = productRepo;
     }
 
-    public Catalogue createCatalogue(Catalogue catalogue, Long orgId) {
+    public Catalogue createCatalogue(Long orgId) {
+        Catalogue catalogue = new Catalogue();
         Organization org = organizationRepo.findByOrgId(orgId).orElseThrow();
         catalogue.setOrg(org);
         return catalogueRepo.save(catalogue);

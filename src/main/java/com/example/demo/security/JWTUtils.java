@@ -35,14 +35,13 @@ public class JWTUtils {
     }
 
 
-    public boolean verifyToken(String token){
+    public void verifyToken(String token) throws Exception {
         Algorithm algorithm = Algorithm.HMAC256(SecurityConstants.KEY.getBytes());
         try{
             JWTVerifier jwtVerifier = JWT.require(algorithm).build();
             jwtVerifier.verify(token);
-            return true;
         } catch (Exception e){
-            return false;
+            throw new Exception(e.getMessage());
         }
     }
 

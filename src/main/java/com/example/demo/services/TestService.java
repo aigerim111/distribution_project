@@ -4,7 +4,8 @@ import com.example.demo.entities.*;
 import com.example.demo.repositories.*;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TestService {
@@ -15,14 +16,18 @@ public class TestService {
     private final DictProductTypeRepo productTypeRepo;
     private final WarehouseRepo warehouseRepo;
     private final OrderRepo orderRepo;
+    private final CatalogueRepo catalogueRepo;
+    private final CatalogueProductsRepo catalogueProductsRepo;
 
-    public TestService(UserRepo userRepo, OrganizationRepo organizationRepo, DictProductRepo productRepo, DictProductTypeRepo productTypeRepo, WarehouseRepo warehouseRepo, OrderRepo orderRepo) {
+    public TestService(UserRepo userRepo, OrganizationRepo organizationRepo, DictProductRepo productRepo, DictProductTypeRepo productTypeRepo, WarehouseRepo warehouseRepo, OrderRepo orderRepo, CatalogueRepo catalogueRepo, CatalogueProductsRepo catalogueProductsRepo) {
         this.userRepo = userRepo;
         this.organizationRepo = organizationRepo;
         this.productRepo = productRepo;
         this.productTypeRepo = productTypeRepo;
         this.warehouseRepo = warehouseRepo;
         this.orderRepo = orderRepo;
+        this.catalogueRepo = catalogueRepo;
+        this.catalogueProductsRepo = catalogueProductsRepo;
     }
 
 //    public Login loginUser(UserDTO userDTO) {
@@ -65,11 +70,18 @@ public class TestService {
 //        return organizationRepo.saveAll(organization);
 //    }
 
-    public DictProduct createProduct(DictProduct product, Long productTypeId) throws IOException {
-        DictProductType productType = productTypeRepo.findById(productTypeId).orElseThrow();
-        product.setDictProductType(productType);
+//    public DictProduct createProduct(DictProduct product, Long productTypeId) throws IOException {
+//        DictProductType productType = productTypeRepo.findById(productTypeId).orElseThrow();
+//        product.setDictProductType(productType);
+//
+//        return productRepo.save(product);
+//    }
 
-        return productRepo.save(product);
+    public List<DictProduct> findProductsByCatalogue(Long catalogueId){
+        Catalogue catalogue = catalogueRepo.findByCatalogueId(catalogueId).orElseThrow();
+        List<CatalogueProducts> catalogueProducts = catalogueProductsRepo.findAllByCatalogue(catalogue);
+
+        return catalogueProducts.stream().map(CatalogueProducts::getProduct).collect(Collectors.toList());
     }
 
     public Warehouse createWarehouse(Warehouse warehouse, Long orgId) {

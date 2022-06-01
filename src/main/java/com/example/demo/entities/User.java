@@ -31,15 +31,17 @@ public class User {
     private String nameRu;
     private String nameKz;
     private String phone;
+    private String activationCode;
 
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;
-    private boolean isActive = true;
+    private boolean isActive;
 
     @PrePersist
     protected void onCreate(){
         this.createdDateTime = LocalDateTime.now();
+        this.isActive = false;
     }
 
 }

@@ -10,8 +10,6 @@ public class LoginDTO {
     @NotEmpty
     private String username;
     @NotEmpty
-    private String email;
-    @NotEmpty
     private String password;
 
 }

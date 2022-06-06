@@ -1,17 +1,18 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.UserDTO;
+import com.example.demo.entities.EmailToken;
 import com.example.demo.entities.Organization;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.User;
+import com.example.demo.repositories.EmailTokenRepo;
 import com.example.demo.repositories.OrganizationRepo;
 import com.example.demo.repositories.RoleRepo;
 import com.example.demo.repositories.UserRepo;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -19,13 +20,14 @@ public class UserService {
     private final UserRepo userRepo;
     private final OrganizationRepo orgRepo;
     private final RoleRepo roleRepo;
-
+    private final EmailTokenRepo tokenRepo;
     private final MailSender mailSender;
 
-    public UserService(UserRepo userRepo, OrganizationRepo orgRepo, RoleRepo roleRepo, MailSender mailSender) {
+    public UserService(UserRepo userRepo, OrganizationRepo orgRepo, RoleRepo roleRepo, EmailTokenRepo tokenRepo, MailSender mailSender) {
         this.userRepo = userRepo;
         this.orgRepo = orgRepo;
         this.roleRepo = roleRepo;
+        this.tokenRepo = tokenRepo;
         this.mailSender = mailSender;
     }
 
@@ -39,9 +41,11 @@ public class UserService {
         user.setOrg(organization);
 
         //activationCode
-        user.setActivationCode(UUID.randomUUID().toString());
+//        (UUID.randomUUID().toString());
 
-        mailSender.sendMail(email, organization.getNameRu(), user.getActivationCode());
+        EmailToken emailToken = new EmailToken(user);
+
+        mailSender.sendMail(email, /*organization.getNameRu(),*/ emailToken.getToken());
         return userRepo.save(user);
     }
 
@@ -66,13 +70,18 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public boolean activateUser(String code) {
-        User user = userRepo.findByActivationCode(code).orElseThrow();
+    //Создать свою ошибку
+    public void activateUser(String token) throws Exception {
+        EmailToken emailToken = tokenRepo.findByToken(token).orElseThrow();
+        User user = emailToken.getUser();
+        if (emailToken.getExpiryDate().isBefore(LocalDateTime.now())){
+            user.setActive(true);
+            userRepo.save(user);
+            tokenRepo.delete(emailToken);
+        }
+        else{
+            throw new Exception("Something went wrong");
+        }
 
-        user.setActivationCode(null);
-        user.setActive(true);
-        userRepo.save(user);
-
-        return true;
     }
 }

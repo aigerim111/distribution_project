@@ -31,7 +31,6 @@ public class User {
     private String nameRu;
     private String nameKz;
     private String phone;
-    private String activationCode;
 
     @Column(updatable = false)
     private LocalDateTime createdDateTime;

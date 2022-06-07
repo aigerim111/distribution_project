@@ -40,15 +40,14 @@ public class UserController {
     }
 
     @GetMapping("/activate/{code}")
-    public ResponseEntity<String> activateAcc(@PathVariable("code") String code){
+    public ResponseEntity<String> activateAcc(@PathVariable("code") String token) {
 
-        boolean isActivated = userService.activateUser(code);
-
-        if (isActivated){
+        try {
+            userService.activateUser(token);
             return new ResponseEntity<>("Your account activated successfully", HttpStatus.OK);
         }
-        else{
-            return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_GATEWAY);
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
         }
     }
 

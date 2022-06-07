@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/api/auth")
-public class AuthController {
+public class    AuthController {
 
     private final UserService userService;
 

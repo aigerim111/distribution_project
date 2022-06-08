@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
@@ -26,7 +27,7 @@ public class User {
 //    @Column(nullable = false)
     private String email;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Role> roles;
+    private Collection<Role> roles = new ArrayList<>();
 
     private String nameRu;
     private String nameKz;
@@ -35,11 +36,14 @@ public class User {
     @Column(updatable = false)
     private LocalDateTime createdDateTime;
     private LocalDateTime modifiedDateTime;
-    private boolean isActive = true;
+
+
+    private boolean isActive;
 
     @PrePersist
     protected void onCreate(){
         this.createdDateTime = LocalDateTime.now();
+        this.isActive = false;
     }
 
 }

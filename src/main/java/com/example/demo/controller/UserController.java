@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.entities.User;
 import com.example.demo.services.UserService;
@@ -23,18 +22,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/register/{orgId}")
-    public ResponseEntity<User> loginUser(@RequestBody LoginDTO user, @PathVariable("orgId") String orgId){
-        return new ResponseEntity<>(userService.registerUser(user, Long.parseLong(orgId)), HttpStatus.OK);
-    }
 
-
-    @PostMapping("/user/{userid}")
-    public ResponseEntity<User> addUserData(@RequestBody UserDTO userDTO,
-                                            @PathVariable("userid") String userId){
-        return new ResponseEntity<>(
-                userService.addUserData(userDTO, Long.parseLong(userId)), HttpStatus.OK);
-    }
+//    @PostMapping("/user/{userid}")
+//    public ResponseEntity<User> addUserData(@RequestBody UserDTO userDTO,
+//                                            @PathVariable("userid") String userId){
+//        return new ResponseEntity<>(
+//                userService.addUserData(userDTO, Long.parseLong(userId)), HttpStatus.OK);
+//    }
 
 
 
@@ -42,4 +36,5 @@ public class UserController {
     public ResponseEntity<List<User>> allUsers(){
         return new ResponseEntity<>(userService.allUsers(), HttpStatus.OK);
     }
+
 }

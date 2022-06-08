@@ -1,14 +1,13 @@
 package com.example.demo.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@AllArgsConstructor
+@Data
 public class EmailToken {
 
     @Id
@@ -24,7 +23,7 @@ public class EmailToken {
     @Column(nullable = false)
     private LocalDateTime createdDate;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne
     @JoinColumn(
             nullable = false,
             name = "id"

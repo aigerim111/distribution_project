@@ -10,6 +10,8 @@
 /libraries
 /jpa-buddy.xml
 
-.idea
+/.idea/misc.xml
+/.idea/distribution_project.iml
+/.idea
 /src/main/resources
 /pom.xml

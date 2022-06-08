@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/auth")
@@ -22,7 +23,22 @@ public class AuthController {
     }
 
     @PostMapping("/register/{orgId}")
-    public ResponseEntity<User> registerUser(@RequestBody LoginDTO user, @PathVariable("orgId") String orgId){
-        return new ResponseEntity<>(userService.registerUser(user, Long.parseLong(orgId)), HttpStatus.OK);
+    public ResponseEntity<User> registerUser(@RequestParam("email") String email,
+                                             @RequestParam("userRole") String userRole,
+                                             @PathVariable("orgId") String orgId){
+        return new ResponseEntity<>(userService.registerUser(email, userRole, Long.parseLong(orgId)), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/activate/{code}")
+    public ResponseEntity<String> activateAcc(@PathVariable("code") String token) {
+
+        try {
+            userService.activateUser(token);
+            return new ResponseEntity<>("Your account activated successfully", HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
+        }
     }
 }
